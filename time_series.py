@@ -1,4 +1,5 @@
 class TimeSeries(object):
+    '''The base class for analyzing time series'''
     def __init__(self, data):
         self.data = data
     
@@ -14,6 +15,7 @@ class TimeSeries(object):
     
 
 class StepFunctionTimeSeries(TimeSeries):
+    '''Uses a step function in the get() method'''
     def get(self, x):
         '''Given an X value, get the corresponding Y value.
         
@@ -32,11 +34,13 @@ class StepFunctionTimeSeries(TimeSeries):
 
 
 class LinearTimeSeries(TimeSeries):
+    '''Uses linear interpolation in the get() method of a TimeSeries'''
     def __init__(self, data):
         TimeSeries.__init__(self, data)
         self.data.sort()
     
     def get(self, x):
+        '''Use linear interpolation to get the y value for the supplied x'''
         # if it's out of range to the left,
         # return the first value
         if x < self.data[0][0]:
