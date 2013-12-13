@@ -1,13 +1,17 @@
 class TimeSeries(object):
     '''The base class for analyzing time series, takes a dict now instead of 
-    a list of tuples'''
+    a list of tuples.
+    
+    For the dict, the key is the x value and y is the corresponing value'''
     def __init__(self, data):
         self.data = data
     
     def get(self, x):
-        for (xi,yi) in self.data:
-            if xi == x:
-                return yi
+        if x in self.data:
+            return self.data[x]
+        # for xi, yi in self.data.items():
+        #     if xi == x:
+        #         return yi
         
         raise Exception("Didn't find the value")
     
@@ -23,7 +27,10 @@ class StepFunctionTimeSeries(TimeSeries):
         Uses step interpolation (gets the Y value of the nearest X point)'''
         
         closest_point = None
-        for (xi, yi) in self.data:
+        if x in self.data:
+            return self.data[x]
+
+        for (xi, yi) in self.data.items():
             if closest_point is None:
                 closest_point = (xi, yi)
             else:
