@@ -1,5 +1,6 @@
 class TimeSeries(object):
-    '''The base class for analyzing time series, takes a list of {time, value}-tuples'''
+    '''The base class for analyzing time series, takes a dict now instead of 
+    a list of tuples'''
     def __init__(self, data):
         self.data = data
     
